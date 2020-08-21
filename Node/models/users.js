@@ -1,36 +1,26 @@
-class UserModel {
+const { Sequelize, DataTypes, Model } = require('sequelize');
+const sequelize = require('../database');
 
-    static async getUsers() {
-        return new Promise((resolve, reject) => {
-            let users = [
-                {
-                    id: 1,
-                    nombre: "fran",
-                    apellido: "fog"
-                },
-                {
-                    id: 2,
-                    nombre: "fede",
-                    apellido: "lit"
-                },
-                {
-                    id: 3,
-                    nombre: "tincho",
-                    apellido: "andu",
-                }
-            ];
+class User extends Model {}
 
-            setTimeout(() => resolve(users), 1000);
-        });
+User.init(
+    {
+        // Model attributes are defined here
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        lastName: {
+            type: DataTypes.STRING
+            // allowNull defaults to true
+        }
+    }, 
+    {
+        sequelize, // We need to pass the connection instance
+        modelName: 'User' // We need to choose the model name
     }
+);
 
-    static async getUserById(id) {
-        let users = await this.getUsers();
+User.sync();
 
-        return new Promise((resolve, reject) => {
-            resolve(users.filter(user => user.id == id));
-        });
-    }
-}
-
-module.exports = UserModel;
+module.exports = User;

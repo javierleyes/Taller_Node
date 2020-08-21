@@ -1,10 +1,11 @@
-const fs = require('fs');
-const bodyParser = require('body-parser')
-const express = require('express');
+require('dotenv').config(); // Config
 
-// Config
+const fs = require('fs'); // Files
+
+const bodyParser = require('body-parser'); // Forms and ajax
+
+const express = require('express'); // Express
 const app = express();
-require('dotenv').config();
 const port = process.env.PORT || 3000;
 
 // Archivos estáticos como archivos o vistas 
@@ -21,6 +22,7 @@ app.use(bodyParser.json()); // Fetch o pedidos de javascript (ex AJAX)
 
 
 // Api REST ¿? --> NO ES REST
+// Example pipe and read file
 app.get('/home', (req, res) => {
     fs.createReadStream('./public/index.html', 'utf8').pipe(res);
 });
@@ -30,32 +32,5 @@ app.get('/home', (req, res) => {
 const usersRoute = require('./routes/users');
 app.use("/users", usersRoute);
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
-})
-
-
-
-// base de datos
-const testDb = async function () {
-
-    const { Sequelize } = require('sequelize');
-
-    // Option 2: Passing parameters separately (other dialects)
-    const sequelize = new Sequelize('Mysql', 'root', '1234', {
-        host: 'localhost',
-        dialect: 'mysql'
-    });
-
-    try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
-    } catch (error) {
-        console.error('Unable to connect to the database:', error);
-    }
-
-    sequelize.close()
-}
-
-testDb();
-
+// Specify port and listen
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));

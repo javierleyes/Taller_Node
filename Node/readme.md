@@ -12,6 +12,7 @@ npm i dotenv --save
 npm i sequelize --save
 npm i mysql2 --save
 npm i nodemon --save
+npm i jsonwebtoken --save
 ```
 
 ## package.json
@@ -26,4 +27,5 @@ npm i nodemon --save
 
 https://sequelize.org/
 https://jsonplaceholder.typicode.com/
+https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 
